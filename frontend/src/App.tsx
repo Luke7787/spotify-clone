@@ -1,4 +1,4 @@
-import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
+import { Show, SignInButton, UserButton } from "@clerk/react";
 
 function App() {
   return (
@@ -6,7 +6,6 @@ function App() {
       <header>
         <Show when="signed-out">
           <SignInButton />
-          <SignUpButton />
         </Show>
         <Show when="signed-in">
           <UserButton />
