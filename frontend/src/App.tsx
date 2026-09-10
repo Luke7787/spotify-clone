@@ -1,3 +1,4 @@
+import { Button } from "./components/ui/button";
 import { Show, SignInButton, UserButton } from "@clerk/react";
 
 function App() {
@@ -5,7 +6,9 @@ function App() {
     <>
       <header>
         <Show when="signed-out">
-          <SignInButton />
+          <SignInButton>
+            <Button>Sign In</Button>
+          </SignInButton>
         </Show>
         <Show when="signed-in">
           <UserButton />
