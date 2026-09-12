@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import adminRoutes from "./routes/admin.route.js";
 import authRoutes from "./routes/auth.route.js";
+import songRoutes from "./routes/song.route.js";
+import albumRoutes from "./routes/album.route.js";
+import statsRoutes from "./routes/stat.route.js";
 
 dotenv.config();
 
