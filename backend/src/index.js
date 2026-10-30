@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import { clerkMiddleware } from "@clerk/express";
+import fileUpload from "express-fileupload";
+import path from "path";
 
 import { connectDB } from "./lib/db.js";
 import userRoutes from "./routes/user.route.js";
@@ -12,12 +14,18 @@ import statsRoutes from "./routes/stat.route.js";
 
 dotenv.config();
 
+const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(express.json());
-
-app.use(clerkMiddleware()); // this will add auth to req obj => req.auth.userId
+app.use(express.json()); // to parse req.body
+app.use(clerkMiddleware()); // this will add auth to req obj => req.auth.userId => req.auth
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: path.join(__dirname, "tmp"),
+  }),
+);
 
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
