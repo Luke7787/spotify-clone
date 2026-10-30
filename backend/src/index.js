@@ -24,6 +24,10 @@ app.use(
   fileUpload({
     useTempFiles: true,
     tempFileDir: path.join(__dirname, "tmp"),
+    createParentPath: true,
+    limits: {
+      fileSize: 10 * 1024 * 1024, //10MB max file size
+    },
   }),
 );
 
