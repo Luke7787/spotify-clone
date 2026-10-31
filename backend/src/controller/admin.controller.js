@@ -1,4 +1,5 @@
 import { Song } from "../models/song.model.js";
+import { Album } from "../models/album.model.js";
 
 export const createSong = async (req, res) => {
   try {
@@ -18,5 +19,18 @@ export const createSong = async (req, res) => {
       duration,
       albumId: albumId || null,
     });
-  } catch (error) {}
+
+    await song.save();
+
+    // if song belongs to an album, update the album's songs array
+    if (albumId) {
+      await Album.findByIdAndUpdate(albumId, {
+        $push: { songs: song._id },
+      });
+    }
+    res.status(201).json(song);
+  } catch (error) {
+    console.log("Error in createSong", error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
 };
