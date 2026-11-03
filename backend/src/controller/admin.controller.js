@@ -51,3 +51,9 @@ export const createSong = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteSong = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+  } catch (error) {}
+};
