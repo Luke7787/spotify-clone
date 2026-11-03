@@ -9,7 +9,7 @@ export const protectRoute = async (req, res, next) => {
   next();
 };
 
-export const requiredAdmin = async (req, res, next) => {
+export const requireAdmin = async (req, res, next) => {
   try {
     const currentUser = await clerkClient.users.getUser(req.auth.userId);
     const isAdmin =
