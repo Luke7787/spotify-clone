@@ -52,6 +52,28 @@ export const createSong = async (req, res, next) => {
   }
 };
 
+export const createAlbum = async (req, res, next) => {
+  try {
+    if (!req.files?.imageFile) {
+      return res.status(400).json({ message: "Please upload an image" });
+    }
+
+    const { title, artist } = req.body;
+    if (!title || !artist) {
+      return res.status(400).json({ message: "Title and artist are required" });
+    }
+
+    const imageUrl = await uploadToCloudinary(req.files.imageFile);
+    const album = new Album({ title, artist, imageUrl });
+    await album.save();
+
+    res.status(201).json(album);
+  } catch (error) {
+    console.log("Error in createAlbum", error);
+    next(error);
+  }
+};
+
 export const deleteSong = async (req, res, next) => {
   try {
     const { id } = req.params;
