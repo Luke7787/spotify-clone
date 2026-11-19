@@ -1,3 +1,3 @@
-export const getAllAlbums = (req, res) => {};
+export const getAllAlbums = (req, res, next) => {};
 
-export const getAlbumById = (req, res) => {};
+export const getAlbumById = (req, res, next) => {};
